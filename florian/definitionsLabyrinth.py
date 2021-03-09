@@ -59,6 +59,7 @@ class S:
             self.location["xValue"] = currentY + 1
             return labyrinth
         
+        #nach unten geht noch nicht! Schau mal in den Code
         if self.direction == 2:
             currentX = self.location["xValue"]
             currentY = self.location["yValue"]
