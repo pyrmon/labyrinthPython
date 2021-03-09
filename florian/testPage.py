@@ -10,8 +10,3 @@ for x in range(len(lab)):
 #trying to get my Ss location
 print(dl.getS(lab))
 
-
-
-
-
-

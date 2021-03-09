@@ -11,8 +11,9 @@ class S:
 
 # here I am reading out the labyrinthfile
 def createLabyrinthDic():
-    fileDir = os.path.dirname(os.path.realpath('__file__'))
-    filename = os.path.join(fileDir, 'labyrinthPython/labyrinth.map')
+    #fileDir = os.path.dirname(os.path.realpath('__file__'))
+    #filename = os.path.join(fileDir, 'labyrinthPython/labyrinth.map')
+    filename = "labyrinth.map" #Max: added this line to simply read map file in working dir
     f = open(filename,"r")
     labyrinth = {}
     counter = 0
@@ -25,18 +26,19 @@ def createLabyrinthDic():
         counter += 1
     return labyrinth
         
-#here I want to read the location of S, but something is not adding up here
+#Max: fixed output of location of S by moving some indents around
 def getS(labyrinth):
     location = {}
     yValue = 0
+    xValue = 0
     for x in range(len(labyrinth)):
+        xValue = 0
         for each in labyrinth[x]:
-            xValue = 0
             if each == "S":
                 location["yValue"] = yValue
                 location["xValue"] = xValue
                 pass
             else:
                 xValue += 1
-                yValue += 1
+        yValue += 1
     return location
