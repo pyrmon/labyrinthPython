@@ -4,6 +4,12 @@ import java.util.Scanner; // Import the Scanner class to read text files
 import java.util.Arrays;
 import java.util.*;
 
+/**
+ * Author: MasterMax13124
+ * Last updated: recently?
+ * To-Do: Refine movement for traveler, possibly add/edit some methods
+ */
+
 class labyrinth {
 	private String inputFile; //contains the entire inputfile as a string, currently unused
 	private char[][] map; //2d array of the maze, first index is x, second is y
@@ -15,6 +21,10 @@ class labyrinth {
 	private int travelerY;
 	private int travelerD; //direction, 0 is up, 1 is right etc, can go higher than 3 for pledge algorithm
 
+	/**
+	 * Constructor for class labyrinth
+	 * @param filename Pass filename of map in working directory as string
+	 */
 	public labyrinth(String filename) { // Constructor immediately splits the file into a char array for later
 										// operations
 		List<String> templist = new ArrayList<String>();
@@ -59,12 +69,19 @@ class labyrinth {
 		this.travelerD += directionChange;
 	}
 
+	/**
+	 * Moves the traveler one position.
+	 * To change direction, call changeDirection and pass an int.
+	 */
 	public void moveTraveler() {
 		int[] newcoords = calculatePosition(this.travelerX, this.travelerY, this.travelerD);
 		this.travelerX = newcoords[0];
 		this.travelerY = newcoords[1];
 	}
 
+	/**
+	 * I seperated this from moveTraveler() so I can potentially reuse it somewhere else later.
+	 */
 	private int[] calculatePosition(int xcoord, int ycoord, int direction) {
 		int xcoordn = xcoord;
 		int ycoordn = ycoord;
@@ -90,12 +107,19 @@ class labyrinth {
 		return new int[]{xcoordn, ycoordn};
 	}
 
+	/**
+	 * Returns the current map as char array. That's about it.
+	 */
 	public char[][] getMap() {
 		return map;
 	}
 
+	/**
+	 * Returns the travelers current position and direction as 3 ints.
+	 * @return X coord, Y coord, direction in that order.
+	 */
 	public int[] getTravelerPos() {
-		int[] pos = {this.travelerX, this.travelerY};
+		int[] pos = {this.travelerX, this.travelerY, this.travelerD};
 		return pos;
 	}
 }
