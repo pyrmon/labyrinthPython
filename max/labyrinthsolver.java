@@ -15,11 +15,20 @@ class labyrinthsolver{
 
 		if (lab.getTravelerSurroundings()[2] == '#') {
 			lab.changeDirection(1);
+		}
+
+		if (lab.getTravelerSurroundings()[3] == '#' && lab.getTravelerSurroundings()[1] != '#'){
+			lab.changeDirection(2);
+		}
+		
+		while (lab.getTravelerSurroundings()[1] != '#' && lab.getTravelerSurroundings()[2] != '#' && lab.getTravelerSurroundings()[3] != '#'
+		&& lab.getTravelerSurroundings()[4] != '#') {
 			lab.moveTraveler();
 		}
 
 		while(lab.getTravelerSurroundings()[0] != 'X') {
 			// lab.printMap();
+
 
 			if (lab.getTravelerSurroundings()[2] != '#' && lab.getTravelerSurroundings()[1] == '#') { //move forwards if the space is empty and there is wall to the left
 				lab.moveTraveler();
