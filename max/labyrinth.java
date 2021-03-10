@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Author: MasterMax13124
  * Last updated: recently?
- * To-Do: Refine movement for traveler, possibly add/edit some methods
+ * To-Do: Check for bugs, pretty much done here though
  */
 
 class labyrinth {
@@ -74,6 +74,31 @@ class labyrinth {
 	 * To change direction, call changeDirection and pass an int.
 	 */
 	public void moveTraveler() {
+		char moveicon = ' ';
+		if(true){ //currently always set to true, maybe implement variable for turning the arrows off later
+			int tempdirection = this.travelerD % 4;
+			tempdirection += tempdirection < 0 ? 4 : 0;
+
+			switch(tempdirection) {
+				case 0:
+					moveicon = '^';
+					break;
+				case 1:
+					moveicon = '>';
+					break;
+				case 2: 
+					moveicon = 'v';
+					break;
+				case 3: 
+					moveicon = '<';
+					break;
+				default:
+					break;
+			}
+		}
+
+		map[travelerX][travelerY] = moveicon;
+
 		int[] newcoords = calculatePosition(this.travelerX, this.travelerY, this.travelerD);
 		this.travelerX = newcoords[0];
 		this.travelerY = newcoords[1];
@@ -139,5 +164,19 @@ class labyrinth {
 		surr[3] = map[calculatePosition(travelerX, travelerY, travelerD + 1)[0]][calculatePosition(travelerX, travelerY, travelerD + 1)[1]]; 
 		surr[4] = map[calculatePosition(travelerX, travelerY, travelerD + 2)[0]][calculatePosition(travelerX, travelerY, travelerD + 2)[1]]; 
 		return surr;
+	}
+
+	/**
+	 * Prints the entire map in the terminal.
+	 */
+	public void printMap() {
+		for (int y = 0; y < mapysize; y++) {
+			String row = "";
+			for (int x = 0; x < mapxsize; x++) {
+				row += map[x][y];
+			}
+
+			System.out.println(row);
+		}
 	}
 }
