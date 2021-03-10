@@ -121,18 +121,11 @@ def createLabyrinthDic():
     return labyrinth
         
 #getting S location
+#Max: hab diese Methode mal abgekürzt
 def getS(labyrinth):
     location = {}
-    yValue = 0
-    xValue = 0
-    for x in range(len(labyrinth)):
-        xValue = 0
-        for each in labyrinth[x]:
-            if each == "S":
-                location["yValue"] = yValue
-                location["xValue"] = xValue
-                pass
-            else:
-                xValue += 1
-        yValue += 1
+    for y in range(len(labyrinth)):
+        if labyrinth[y].__contains__("S"):
+            location["yValue"] = y
+            location["xValue"] = labyrinth[y].find("S")
     return location
