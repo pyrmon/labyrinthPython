@@ -6,15 +6,21 @@
 
 class labyrinthsolver{
 	public static void main(String[] args){
-		handWallSolver("labyrinth.map").printMap();
+		leftHandWallSolver("labyrinth.map").printMap();
 	}
 
 	//implements the left hand algorithm
-	public static labyrinth handWallSolver(String filename) {
+	public static labyrinth leftHandWallSolver(String filename) {
 		labyrinth lab = new labyrinth(filename);
-		lab.changeDirection(1); //for demo purposes only, not part of the final algorithm
+
+		if (lab.getTravelerSurroundings()[2] == '#') {
+			lab.changeDirection(1);
+			lab.moveTraveler();
+		}
 
 		while(lab.getTravelerSurroundings()[0] != 'X') {
+			// lab.printMap();
+
 			if (lab.getTravelerSurroundings()[2] != '#' && lab.getTravelerSurroundings()[1] == '#') { //move forwards if the space is empty and there is wall to the left
 				lab.moveTraveler();
 				continue;
@@ -39,7 +45,6 @@ class labyrinthsolver{
 			if (lab.getTravelerSurroundings()[2] != '#' && lab.getTravelerSurroundings()[1] != '#') { //turn to the left if theres no wall to follow
 				lab.changeDirection(-1);
 				lab.moveTraveler();
-				continue;
 			}
 
 		} //end of while loop
