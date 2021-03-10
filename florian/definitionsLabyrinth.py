@@ -2,9 +2,10 @@ import os
 
 #beginning of the S class
 class S:
-    def __init__(self, location, direction):
+    def __init__(self, location, labyrinth):
         self.location = location
-        self.direction = direction
+        self.direction = self.setDirection(self.directionalDict(labyrinth))
+        
     
     #here I want to scout the area and base decisions based on the Ss location. 0 = up, 1 = right, 2 = down, 3 = up
     def directionalDict(self,labyrinth):
@@ -16,6 +17,17 @@ class S:
         directions[2] = labyrinth[yValue + 1 ][xValue]
         directions[3] = labyrinth[yValue][xValue - 1]
         return directions
+
+    def setDirection(self, directionalDict):
+        direction = 3
+        if directionalDict[0] == ' ' and directionalDict[1] == ' ' and directionalDict[2] == ' ' and directionalDict[3] == ' ':
+            return direction
+        elif directionalDict[0] == '#':
+            direction = 1
+            return direction
+        
+        
+        
     
     def goOneStepForward(self,labyrinth):
         if self.direction == 0:
@@ -80,7 +92,7 @@ class S:
                     newStringYPlusOne += each
                 counter += 1
             labyrinth[currentY] = newStringY
-            labyrinth[currentY-1] = newStringYPlusOne
+            labyrinth[currentY+1] = newStringYPlusOne
             self.location["yValue"] = currentY + 1
             return labyrinth
         

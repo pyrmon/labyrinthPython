@@ -11,13 +11,13 @@ for x in range(len(lab)):
 locationS = dl.getS(lab)
 Spieler = dl.S(locationS,0) 
 
-lab = Spieler.goOneStepForward(lab)
+#lab = Spieler.goOneStepForward(lab)
 
-print("\n\n\n\n\n")
+print(Spieler.directionDict)
 #print(locationS)
 #print(Spieler.directionalDict(lab))
 
-for x in range(len(lab)):
-    print(lab[x])
+#for x in range(len(lab)):
+#    print(lab[x])
     
 
