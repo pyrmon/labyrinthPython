@@ -81,29 +81,32 @@ class labyrinth {
 
 	/**
 	 * I seperated this from moveTraveler() so I can potentially reuse it somewhere else later.
+	 * Update: I did use it later, smart me
 	 */
 	private int[] calculatePosition(int xcoord, int ycoord, int direction) {
 		int xcoordn = xcoord;
 		int ycoordn = ycoord;
+		int tempdirection = direction % 4;
+		tempdirection += tempdirection < 0 ? 4 : 0;
 
-		switch(direction % 4) {
+		switch(tempdirection) {
 			case 0:
 				ycoordn = ycoord > 0 ? ycoord -1 : ycoord;
 				break;
-			case 1:
+			case 3:
 				xcoordn = xcoord > 0 ? xcoord -1 : xcoord;
 				break;
 			case 2:
-				ycoordn = ycoord < this.mapysize ? ycoord -1 : ycoord;
+				ycoordn = ycoord < this.mapysize ? ycoord +1 : ycoord;
 				break;
-			case 3:
-				xcoordn = xcoord < this.mapxsize ? xcoord -1 : xcoord;
+			case 1:
+				xcoordn = xcoord < this.mapxsize ? xcoord +1 : xcoord;
 				break;
 			default:
 				System.out.println("Something is wrong with the position calculation lmao");
 				break;
 		}
-
+		//If the position calculation breaks, this just returns the original position, be careful
 		return new int[]{xcoordn, ycoordn};
 	}
 
@@ -121,5 +124,20 @@ class labyrinth {
 	public int[] getTravelerPos() {
 		int[] pos = {this.travelerX, this.travelerY, this.travelerD};
 		return pos;
+	}
+
+	/**
+	 * Returns the travelers surrounding four squares (no diagonals) and the square its standing on as chars,
+	 * based on the direction the traveler is facing.
+	 * @return char array with current position, then left square, front square etc
+	 */
+	public char[] getTravelerSurroundings() {
+		char[] surr = new char[5];
+		surr[0] = map[travelerX][travelerY]; //Square that traveler is standing on
+		surr[1] = map[calculatePosition(travelerX, travelerY, travelerD + -1)[0]][calculatePosition(travelerX, travelerY, travelerD + -1)[1]]; //Square to the left of the travelers facing direction
+		surr[2] = map[calculatePosition(travelerX, travelerY, travelerD + 0)[0]][calculatePosition(travelerX, travelerY, travelerD + 0)[1]]; 
+		surr[3] = map[calculatePosition(travelerX, travelerY, travelerD + 1)[0]][calculatePosition(travelerX, travelerY, travelerD + 1)[1]]; 
+		surr[4] = map[calculatePosition(travelerX, travelerY, travelerD + 2)[0]][calculatePosition(travelerX, travelerY, travelerD + 2)[1]]; 
+		return surr;
 	}
 }
