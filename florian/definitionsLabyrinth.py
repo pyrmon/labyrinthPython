@@ -2,12 +2,14 @@ import os
 
 #beginning of the S class
 class S:
-    def __init__(self, location, direction):
+    def __init__(self, location, direction, labyrinth):
         self.location = location
-        self.direction = direction 
+        self.direction = direction
+        self.labyrinth = labyrinth 
     
-    #here I want to scout the area and base decisions based on the Ss location. 0 = up, 1 = right, 2 = down, 3 = up
-    def directionalDict(self,labyrinth):
+    #here I want to scout the area and base decisions based on the Ss location and direction. 
+    # 0 = own location, 1 = left square, 2 = front square, 3 = right square, 4 = back square
+    def surroundingsDict(self,labyrinth):
         directions = {}
         yValue = self.location["yValue"]
         xValue = self.location["xValue"]
@@ -18,7 +20,9 @@ class S:
         return directions
 
     def changeDirection(self, changedDirection):
-        self.direction = changedDirection
+        self.direction += changedDirection
+        if self.direction == 5:
+            self.direction = 0
     
     def goOneStepForward(self,labyrinth):
         if self.direction == 0:
@@ -104,6 +108,21 @@ class S:
             self.location["xValue"] = currentY + 1
             return labyrinth
 
+    def getAnyPosition(self, xValue, yValue, direction):
+        xValue = xValue
+        yValue = yValue
+        direction = direction
+        location = {}
+        #if direction == 0:
+
+        #elif direction == 1:
+
+        #elif direction == 2:
+
+        #elif direction == 3:
+
+
+        return location
 
 
 # here I am reading out the labyrinthfile
@@ -125,10 +144,10 @@ def createLabyrinthDic():
         
 #getting S location
 #Max: hab diese Methode mal abgekürzt
-def getS(labyrinth):
-    location = {}
-    for y in range(len(labyrinth)):
-        if labyrinth[y].__contains__("S"):
-            location["yValue"] = y
-            location["xValue"] = labyrinth[y].find("S")
-    return location
+def getFirstSLocation(labyrinth):
+        location = {}
+        for y in range(len(labyrinth)):
+            if labyrinth[y].__contains__("S"):
+                location["yValue"] = y
+                location["xValue"] = labyrinth[y].find("S")
+        return location

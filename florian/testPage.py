@@ -25,12 +25,9 @@ for x in range(len(lab)):
     print(lab[x])
 
 #trying to get my Ss location
-locationS = dl.getS(lab)
-Spieler = dl.S(locationS,3) 
-dirDict = Spieler.directionalDict(lab)
-directionDecision(Spieler,dirDict)
+locationS = dl.getFirstSLocation(lab)
+Spieler = dl.S(locationS,3,lab) 
 
-print(dirDict)
 print(Spieler.direction)
 
 
