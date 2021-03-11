@@ -3,58 +3,72 @@ import os
 #beginning of the S class
 class S:
     def __init__(self, location, direction, labyrinth):
-        self.location = location
+        self.SX = location["xValue"]
+        self.SY = location ["yValue"]
         self.direction = direction
         self.labyrinth = labyrinth 
     
     #here I want to scout the area and base decisions based on the Ss location and direction. 
     # 0 = own location, 1 = left square, 2 = front square, 3 = right square, 4 = back square
-    def surroundingsDict(self,labyrinth):
-        directions = {}
-        yValue = self.location["yValue"]
-        xValue = self.location["xValue"]
-        directions[0] = labyrinth[yValue - 1 ][xValue]
-        directions[1] = labyrinth[yValue][xValue + 1]
-        directions[2] = labyrinth[yValue + 1 ][xValue]
-        directions[3] = labyrinth[yValue][xValue - 1]
-        return directions
+    def relationalSurroundingsDict(self):
+        sur = {}
+        yValue = self.SY
+        xValue = self.SX
+        sur[0] = self.labyrinth[yValue][xValue]
+        sur[1] = self.labyrinth[self.calculatePosition(xValue,yValue,self.direction - 1)[0]][self.calculatePosition(xValue,yValue,self.direction - 1)[1]]
+        sur[2] = self.labyrinth[self.calculatePosition(xValue,yValue,self.direction + 0)[0]][self.calculatePosition(xValue,yValue,self.direction + 0)[1]]
+        sur[3] = self.labyrinth[self.calculatePosition(xValue,yValue,self.direction + 1)[0]][self.calculatePosition(xValue,yValue,self.direction + 1)[1]]
+        sur[4] = self.labyrinth[self.calculatePosition(xValue,yValue,self.direction + 2)[0]][self.calculatePosition(xValue,yValue,self.direction + 2)[1]]
+        return sur
 
     def changeDirection(self, changedDirection):
         self.direction += changedDirection
-        if self.direction == 5:
-            self.direction = 0
-    
-    def goOneStepForward(self,labyrinth):
+        
+    def calculatePosition(self, xcoord, ycoord, direction):
+        xcoordn = xcoord
+        ycoordn = ycoord
+        tempdirection = direction % 4
+        if tempdirection == 0:
+            ycoordn -= 1
+        elif tempdirection == 1:
+            xcoordn += 1
+        elif tempdirection == 2:
+            ycoordn += 1
+        else:
+            xcoordn -= 1
+        return [xcoordn,ycoordn]
+
+    def goOneStepForward(self):
         if self.direction == 0:
-            currentX = self.location["xValue"]
-            currentY = self.location["yValue"]
+            currentX = self.SX
+            currentY = self.SY
             newStringY = ''
             newStringYMinusOne = ''
             counter = 0
-            for each in labyrinth[currentY]:
+            for each in self.labyrinth[currentY]:
                 if counter == currentX:
                     newStringY += ' '
                 else:
                     newStringY += each
                 counter += 1
             counter = 0
-            for each in labyrinth[currentY-1]:
+            for each in self.labyrinth[currentY-1]:
                 if counter == currentX:
                     newStringYMinusOne += 'S'
                 else:
                     newStringYMinusOne += each
                 counter += 1
-            labyrinth[currentY] = newStringY
-            labyrinth[currentY-1] = newStringYMinusOne
-            self.location["yValue"] = currentY - 1
-            return labyrinth
+            self.labyrinth[currentY] = newStringY
+            self.labyrinth[currentY-1] = newStringYMinusOne
+            self.SY = currentY - 1
+            
         
         if self.direction == 1:
-            currentX = self.location["xValue"]
-            currentY = self.location["yValue"]
+            currentX = self.SX
+            currentY = self.SY
             newStringY = ''
             counter = 0
-            for each in labyrinth[currentY]:
+            for each in self.labyrinth[currentY]:
                 if counter == currentX:
                     newStringY += ' '
                 elif counter == currentX + 1:
@@ -62,41 +76,41 @@ class S:
                 else:
                     newStringY += each
                 counter += 1
-            labyrinth[currentY] = newStringY
-            self.location["xValue"] = currentY + 1
-            return labyrinth
+            self.labyrinth[currentY] = newStringY
+            self.SX = currentY + 1
+            
         
         #nach unten geht noch nicht! Schau mal in den Code
         if self.direction == 2:
-            currentX = self.location["xValue"]
-            currentY = self.location["yValue"]
+            currentX = self.SX
+            currentY = self.SY
             newStringY = ''
             newStringYPlusOne = ''
             counter = 0
-            for each in labyrinth[currentY]:
+            for each in self.labyrinth[currentY]:
                 if counter == currentX:
                     newStringY += ' '
                 else:
                     newStringY += each
                 counter += 1
             counter = 0
-            for each in labyrinth[currentY+1]:
+            for each in self.labyrinth[currentY+1]:
                 if counter == currentX:
                     newStringYPlusOne += 'S'
                 else:
                     newStringYPlusOne += each
                 counter += 1
-            labyrinth[currentY] = newStringY
-            labyrinth[currentY+1] = newStringYPlusOne
-            self.location["yValue"] = currentY + 1
-            return labyrinth
+            self.labyrinth[currentY] = newStringY
+            self.labyrinth[currentY+1] = newStringYPlusOne
+            self.SY = currentY + 1
+            
         
         if self.direction == 3:
-            currentX = self.location["xValue"]
-            currentY = self.location["yValue"]
+            currentX = self.SX
+            currentY = self.SY
             newStringY = ''
             counter = 0
-            for each in labyrinth[currentY]:
+            for each in self.labyrinth[currentY]:
                 if counter == currentX:
                     newStringY += ' '
                 elif counter == currentX - 1:
@@ -104,25 +118,14 @@ class S:
                 else:
                     newStringY += each
                 counter += 1
-            labyrinth[currentY] = newStringY
-            self.location["xValue"] = currentY + 1
-            return labyrinth
-
-    def getAnyPosition(self, xValue, yValue, direction):
-        xValue = xValue
-        yValue = yValue
-        direction = direction
-        location = {}
-        #if direction == 0:
-
-        #elif direction == 1:
-
-        #elif direction == 2:
-
-        #elif direction == 3:
-
-
-        return location
+            self.labyrinth[currentY] = newStringY
+            self.SX = currentY + 1
+        
+        #printing the labyrinth
+        print("\n\n")
+        for x in range(len(self.labyrinth)):
+            print(self.labyrinth[x])
+            
 
 
 # here I am reading out the labyrinthfile

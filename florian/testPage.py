@@ -1,21 +1,33 @@
 import definitionsLabyrinth as dl
 
-def directionDecision(Sp, directionalDict):
-        if directionalDict[0] == ' ' and directionalDict[1] == ' ' and directionalDict[2] == ' ' and directionalDict[3] == ' ':
-            direction = 3
-            Sp.changeDirection(direction)
-        elif directionalDict[3] == '#':
-            direction = 0
-            Sp.changeDirection(direction)
-        elif directionalDict[2] == '#':
-            direction = 3
-            Sp.changeDirection(direction)
-        elif directionalDict[1] == '#':
-            direction = 2
-            Sp.changeDirection(direction)
-        elif directionalDict[0] == '#':
-            direction = 1
-            Sp.changeDirection(direction)
+def leftHandLabyrinthSolver(Sp):
+        if Sp.relationalSurroundingsDict()[2] == '#':
+            Sp.changeDirection(1)
+        if Sp.relationalSurroundingsDict()[3] == '#' and Sp.relationalSurroundingsDict()[1] != '#':
+            Sp.changeDirection(2)
+        if Sp.relationalSurroundingsDict()[1] != '#' and Sp.relationalSurroundingsDict()[2] != '#' and Sp.relationalSurroundingsDict()[3] != '#' and Sp.relationalSurroundingsDict()[4] != '#':
+            Sp.goOneStepForward()
+        
+        while(Sp.relationalSurroundingsDict[0] != 'X'):
+            
+            if Sp.relationalSurroundingsDict()[2] != '#' and Sp.relationalSurroundingsDict()[1] == '#':
+                Sp.goOneStepForward()
+            
+            if Sp.relationalSurroundingsDict()[2] == '#':
+                if Sp.relationalSurroundingsDict()[1] != '#':
+                    Sp.changeDirection(-1)
+                    Sp.goOneStepForward()
+                elif Sp.relationalSurroundingsDict()[3] != '#':
+                    Sp.changeDirection(1)
+                    Sp.goOneStepForward()
+                else:
+                    Sp.changeDirection(2)
+                    Sp.goOneStepForward()
+            
+            if Sp.relationalSurroundingsDict()[2] != '#' and Sp.relationalSurroundingsDict()[1] != '#':
+                Sp.changeDirection(-1)
+                Sp.goOneStepForward()
+        
 
 #reading the labyrinth out of the file
 lab = dl.createLabyrinthDic()
@@ -26,9 +38,10 @@ for x in range(len(lab)):
 
 #trying to get my Ss location
 locationS = dl.getFirstSLocation(lab)
+#generating player
 Spieler = dl.S(locationS,3,lab) 
-
-print(Spieler.direction)
+#solving labyrinth
+leftHandLabyrinthSolver(Spieler)
 
 
 
