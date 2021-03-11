@@ -4,7 +4,7 @@ import os
 class S:
     def __init__(self, location, direction):
         self.location = location
-        self.direction = direction
+        self.direction = direction 
     
     #here I want to scout the area and base decisions based on the Ss location. 0 = up, 1 = right, 2 = down, 3 = up
     def directionalDict(self,labyrinth):
@@ -16,6 +16,9 @@ class S:
         directions[2] = labyrinth[yValue + 1 ][xValue]
         directions[3] = labyrinth[yValue][xValue - 1]
         return directions
+
+    def changeDirection(self, changedDirection):
+        self.direction = changedDirection
     
     def goOneStepForward(self,labyrinth):
         if self.direction == 0:
@@ -80,7 +83,7 @@ class S:
                     newStringYPlusOne += each
                 counter += 1
             labyrinth[currentY] = newStringY
-            labyrinth[currentY-1] = newStringYPlusOne
+            labyrinth[currentY+1] = newStringYPlusOne
             self.location["yValue"] = currentY + 1
             return labyrinth
         
