@@ -23,6 +23,7 @@ class S:
 
     def changeDirection(self, changedDirection):
         self.direction += changedDirection
+        self.direction = self.direction % 4
         
     def calculatePosition(self, xcoord, ycoord, direction):
         xcoordn = xcoord
@@ -36,7 +37,7 @@ class S:
             ycoordn += 1
         else:
             xcoordn -= 1
-        return [xcoordn,ycoordn]
+        return [ycoordn,xcoordn]
 
     def goOneStepForward(self):
         if self.direction == 0:
@@ -77,10 +78,10 @@ class S:
                     newStringY += each
                 counter += 1
             self.labyrinth[currentY] = newStringY
-            self.SX = currentY + 1
+            self.SX = currentX + 1
             
         
-        #nach unten geht noch nicht! Schau mal in den Code
+        
         if self.direction == 2:
             currentX = self.SX
             currentY = self.SY
@@ -119,7 +120,7 @@ class S:
                     newStringY += each
                 counter += 1
             self.labyrinth[currentY] = newStringY
-            self.SX = currentY + 1
+            self.SX = currentX - 1
         
         #printing the labyrinth
         print("\n\n")
