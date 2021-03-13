@@ -8,7 +8,7 @@ def leftHandLabyrinthSolver(Sp):
         if Sp.relationalSurroundingsDict()[1] != '#' and Sp.relationalSurroundingsDict()[2] != '#' and Sp.relationalSurroundingsDict()[3] != '#' and Sp.relationalSurroundingsDict()[4] != '#':
             Sp.goOneStepForward()
         
-        while(Sp.relationalSurroundingsDict()[0] != 'X'):
+        while(Sp.relationalSurroundingsDict()[1] != 'X'):
             
             if Sp.relationalSurroundingsDict()[2] != '#' and Sp.relationalSurroundingsDict()[1] == '#':
                 Sp.goOneStepForward()
