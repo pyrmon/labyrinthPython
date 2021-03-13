@@ -43,15 +43,7 @@ class S:
         if self.direction == 0:
             currentX = self.SX
             currentY = self.SY
-            newStringY = ''
             newStringYMinusOne = ''
-            counter = 0
-            for each in self.labyrinth[currentY]:
-                if counter == currentX:
-                    newStringY += ' '
-                else:
-                    newStringY += each
-                counter += 1
             counter = 0
             for each in self.labyrinth[currentY-1]:
                 if counter == currentX:
@@ -59,7 +51,6 @@ class S:
                 else:
                     newStringYMinusOne += each
                 counter += 1
-            self.labyrinth[currentY] = newStringY
             self.labyrinth[currentY-1] = newStringYMinusOne
             self.SY = currentY - 1
             
@@ -70,9 +61,7 @@ class S:
             newStringY = ''
             counter = 0
             for each in self.labyrinth[currentY]:
-                if counter == currentX:
-                    newStringY += ' '
-                elif counter == currentX + 1:
+                if counter == currentX + 1:
                     newStringY += 'S'
                 else:
                     newStringY += each
@@ -85,15 +74,7 @@ class S:
         if self.direction == 2:
             currentX = self.SX
             currentY = self.SY
-            newStringY = ''
             newStringYPlusOne = ''
-            counter = 0
-            for each in self.labyrinth[currentY]:
-                if counter == currentX:
-                    newStringY += ' '
-                else:
-                    newStringY += each
-                counter += 1
             counter = 0
             for each in self.labyrinth[currentY+1]:
                 if counter == currentX:
@@ -101,7 +82,6 @@ class S:
                 else:
                     newStringYPlusOne += each
                 counter += 1
-            self.labyrinth[currentY] = newStringY
             self.labyrinth[currentY+1] = newStringYPlusOne
             self.SY = currentY + 1
             
@@ -112,9 +92,7 @@ class S:
             newStringY = ''
             counter = 0
             for each in self.labyrinth[currentY]:
-                if counter == currentX:
-                    newStringY += ' '
-                elif counter == currentX - 1:
+                if counter == currentX - 1:
                     newStringY += 'S'
                 else:
                     newStringY += each
@@ -123,9 +101,9 @@ class S:
             self.SX = currentX - 1
         
         #printing the labyrinth
-        print("\n\n")
-        for x in range(len(self.labyrinth)):
-            print(self.labyrinth[x])
+        #print("\n\n")
+        #for x in range(len(self.labyrinth)):
+        #    print(self.labyrinth[x])
             
 
 

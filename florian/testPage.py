@@ -27,6 +27,8 @@ def leftHandLabyrinthSolver(Sp):
             if Sp.relationalSurroundingsDict()[2] != '#' and Sp.relationalSurroundingsDict()[1] != '#':
                 Sp.changeDirection(-1)
                 Sp.goOneStepForward()
+    
+    
         
 
 #reading the labyrinth out of the file
@@ -42,6 +44,10 @@ locationS = dl.getFirstSLocation(lab)
 Spieler = dl.S(locationS,3,lab) 
 #solving labyrinth
 leftHandLabyrinthSolver(Spieler)
+
+print("\n\n")
+for x in range(len(Spieler.labyrinth)):
+    print(Spieler.labyrinth[x])
 
 
 
