@@ -47,7 +47,7 @@ class S:
             counter = 0
             for each in self.labyrinth[currentY-1]:
                 if counter == currentX:
-                    newStringYMinusOne += 'S'
+                    newStringYMinusOne += '^'
                 else:
                     newStringYMinusOne += each
                 counter += 1
@@ -62,7 +62,7 @@ class S:
             counter = 0
             for each in self.labyrinth[currentY]:
                 if counter == currentX + 1:
-                    newStringY += 'S'
+                    newStringY += '>'
                 else:
                     newStringY += each
                 counter += 1
@@ -78,7 +78,7 @@ class S:
             counter = 0
             for each in self.labyrinth[currentY+1]:
                 if counter == currentX:
-                    newStringYPlusOne += 'S'
+                    newStringYPlusOne += 'v'
                 else:
                     newStringYPlusOne += each
                 counter += 1
@@ -93,7 +93,7 @@ class S:
             counter = 0
             for each in self.labyrinth[currentY]:
                 if counter == currentX - 1:
-                    newStringY += 'S'
+                    newStringY += '<'
                 else:
                     newStringY += each
                 counter += 1
